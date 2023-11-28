@@ -18,7 +18,6 @@ private val AUTHOR_DIFF_CALLBACK = object : DiffUtil.ItemCallback<Author>() {
         oldItem == newItem
 }
 class AuthorPagingAdapter (private val onClickAction: (author: Author)->Unit): PagingDataAdapter<Author, AuthorPagingAdapter.AuthorViewHolder>(AUTHOR_DIFF_CALLBACK) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AuthorViewHolder {
         return AuthorViewHolder(
             parent,
@@ -30,14 +29,12 @@ class AuthorPagingAdapter (private val onClickAction: (author: Author)->Unit): P
             onClickAction
         )
     }
-
     override fun onBindViewHolder(holder: AuthorViewHolder, position: Int) {
         val tile = getItem(position)
         if (tile != null) {
             holder.bind(tile)
         }
     }
-
     class AuthorViewHolder(val parent: ViewGroup, val itemBinding: AuthorItemViewBinding, private val onClickAction: (author: Author)->Unit) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(author: Author) {

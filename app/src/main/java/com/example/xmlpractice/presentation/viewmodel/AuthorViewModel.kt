@@ -3,6 +3,7 @@ package com.example.xmlpractice.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.xmlpractice.data.model.Author
 import com.example.xmlpractice.data.repository.AuthorRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,10 +32,9 @@ class AuthorViewModel @Inject constructor(private val repository: AuthorReposito
 
     fun fetchAuthorListPagination() {
         viewModelScope.launch {
-            repository.getAuthorsPaging().collect {
+            repository.getAuthorsPaging().cachedIn(viewModelScope).collect {
                 _authorPagingData.value = it
             }
         }
     }
-
 }
